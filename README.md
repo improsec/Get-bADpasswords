@@ -9,23 +9,27 @@ These instructions will get you a copy of the project up and running on your loc
 
 
 ### Prerequisites
-#### Microsoft Visual C++ Redistributable Package for Visual Studio 2017
+
+#### Microsoft Visual C++ Redistributable Package
+
 * Go to [Microsoft Latest Supported Visual C++ Download](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads)
 * Download and install the Visual Studio 2017 version of the Visual C++ Redistributable Package for your target platform
   * For 32-bit systems: vc_redist.x86.exe
   * For 64-bit systems: vc_redist.x64.exe
 * No restart required
 
-#### .NET Framework 4.5.1+
+#### Microsoft .NET Framework 4.5.1+
+
 * Go to [Microsoft .NET Framework 4.5 Download](https://www.microsoft.com/en-us/download/details.aspx?id=30653)
 * Download and install the .NET Framework 4.5 in your preferred language
 * (Restart? No restart?) required
 
 #### DSInternals PowerShell Modules
-* Go to [DSInternals by Michael Grafnetter](https://github.com/MichaelGrafnetter/DSInternals)
+
+* Go to [DSInternals Reposity](https://github.com/MichaelGrafnetter/DSInternals) by Michael Grafnetter
 
 ```
-Give examples
+Example script woohoo!!
 ```
 
 ### Installing
@@ -81,23 +85,17 @@ Add additional notes about how to deploy this on a live system
 
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
 ## Authors
-* **Jakob H. Heidelberg** ([ZilentJack](https://github.com/PurpleBooth)) - *Initial work* - 
-* **Valdemar Carøe** ([VirtualPuppet](https://github.com/PurpleBooth)) - *Initial work* - 
-* **Nichlas Falk** ([SwiggitySwooty](https://github.com/PurpleBooth)) - *Initial work* - 
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Jakob H. Heidelberg** ([ZilentJack](https://github.com/ZilentJack)) - *Initial work* - 
+* **Valdemar Carøe** ([VirtualPuppet](https://github.com/VirtualPuppet)) - *Initial work* - 
+* **Nichlas Falk** ([...](https://github.com/...)) - *Initial work* - 
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the BSD 3-Clause License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Michael Grafnetter for the amazing DSInternals framework
+* Troy Hunt for the amazing PwnedPasswords list of leaked password hashes
