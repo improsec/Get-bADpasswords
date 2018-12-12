@@ -40,5 +40,5 @@ ForEach($Names in $strNamesCustom)
 }
 
 
-$arrBadPwdGeneral | Set-Content $fileNameGeneral 
-$arrBadPwdCustom | Set-Content $fileNameCustom 
+$arrBadPwdGeneral | Set-Content ".\Accessible\Wordlists\$fileNameGeneral"
+$arrBadPwdCustom | Set-Content ".\Accessible\Wordlists\$fileNameCustom"
