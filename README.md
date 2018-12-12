@@ -52,14 +52,9 @@ This file contains a binary packed list of leaked password hashes from the Pwned
 
 ## Installing
 * Install this entire repository
-* (Optional) Modify the wordlists at '<path>/Accessible/Wordlists/*.txt' to your own liking
 * Open 'Get-bADpasswords.ps1'
-  * Navigate to
-```powershell
-# ================ #
-# CONFIGURATION => #
-# ================ #
-```
+  * Navigate to the configuration-section and modify the variables to fit your needs
+* (Optional) Modify the wordlists at '<path>/Accessible/Wordlists/*.txt' to your own liking
 
 ## Deployment
 
