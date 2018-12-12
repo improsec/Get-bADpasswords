@@ -5,7 +5,7 @@ Get insights into the actual strength and quality of passwords in Active Directo
 
 ## Dependencies
 
-#### Microsoft Visual C++ Redistributable Package
+### Microsoft Visual C++ Redistributable Package
 Microsoft Visual C++ Redistributable Package is required by our PSI DLL. This DLL is reponsible for parsing the leaked-password binary file and performing comparisons against it. The source code for the DLL can be found [here](./Source).
 
 ##### Installation step-by-step
