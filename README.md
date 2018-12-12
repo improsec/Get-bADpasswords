@@ -16,7 +16,7 @@ Microsoft Visual C++ Redistributable Package is required by our PSI DLL. This DL
 * No restart required
 
 #### Microsoft .NET Framework 4.5.1+
-Microsoft .NET Framework 4.5.1+ is required by the DSInternals 3.0 PowerShell module by Michael Grafnetter. This PowerShell module is used to fetch user information from the Active Directory. The source code for the module can be found [here](https://github.com/MichaelGrafnetter/DSInternals).
+Microsoft .NET Framework 4.5.1+ is required by the DSInternals 3.0 PowerShell module by Michael Grafnetter.
 
 ##### Installation step-by-step
 * Go to [Microsoft .NET Framework 4.5 Download](https://www.microsoft.com/en-us/download/details.aspx?id=30653)
@@ -25,10 +25,12 @@ Microsoft .NET Framework 4.5.1+ is required by the DSInternals 3.0 PowerShell mo
 
 ## Prerequisites
 
-#### DSInternals 3.0 PowerShell Modules
+#### DSInternals 3.0 PowerShell Module
+This module is used to query the Active Directory and fetch user information (SAM Account Name, E-mail, Password Hash, etc.). The source code for this module can be found [here](https://github.com/MichaelGrafnetter/DSInternals).
 
+##### Installation step-by-step
 * Go to [DSInternals 3.0 PowerShell Module Download](https://www.powershellgallery.com/packages/DSInternals/3.0)
-* Download and install the DSInternals 3.0 Powershell Modules
+* Download and install the DSInternals 3.0 PowerShell Module
 * No restart required
 
 Alternatively, you can install DSInternals 3.0 through PowerShellGet by running the following PowerShell command:
@@ -37,8 +39,13 @@ Install-Module -Name DSInternals
 ```
 
 ### Leaked password list
+This file contains a binary packed list of leaked password hashes from the Troy Hunt PwnedPasswords list. The file is too big (8 GB) for GitHub (max 25 MB), so we host it on our SharePoint instead. 
 
-* Go to []
+##### Installation step-by-step
+* Go to [Improsec Leaked Password List](https://improsec-my.sharepoint.com/:u:/p/jhh/EdyYIoFELcZBle_0OQX6D1MB51mgZLZQqNx1ELrBs3D_DQ?e=waNigh)
+  * SHA1: 334E236FEA9DB781BE646BB2F80394D9C039BE02
+* Download the _leaked-passwords.bin_ file
+* Place the file in the same folder as the rest of this project
 
 ## Installing
 
