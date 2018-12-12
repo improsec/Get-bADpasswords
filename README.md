@@ -11,11 +11,18 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 #### Microsoft Visual C++ Redistributable Package for Visual Studio 2017
 * Go to [Microsoft Latest Supported Visual C++ Download](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads)
-* Download the Visual Studio 2017 version of the Visual C++ Redistributable Package for your target platform
+* Download and install the Visual Studio 2017 version of the Visual C++ Redistributable Package for your target platform
   * For 32-bit systems: vc_redist.x86.exe
   * For 64-bit systems: vc_redist.x64.exe
+* No restart required
 
-What things you need to install the software and how to install them
+#### .NET Framework 4.5.1+
+* Go to [Microsoft .NET Framework 4.5 Download](https://www.microsoft.com/en-us/download/details.aspx?id=30653)
+* Download and install the .NET Framework 4.5 in your preferred language
+* (Restart? No restart?) required
+
+#### DSInternals PowerShell Modules
+* Go to [DSInternals by Michael Grafnetter](https://github.com/MichaelGrafnetter/DSInternals)
 
 ```
 Give examples
@@ -79,8 +86,9 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Jakob H. Heidelberg** ([ZilentJack](https://github.com/PurpleBooth)) - *Initial work* - 
+* **Valdemar Carøe** ([VirtualPuppet](https://github.com/PurpleBooth)) - *Initial work* - 
+* **Nichlas Falk** ([SwiggitySwooty](https://github.com/PurpleBooth)) - *Initial work* - 
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
