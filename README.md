@@ -38,7 +38,7 @@ This module is used to query the Active Directory and fetch user information (SA
 
 Alternatively, you can install DSInternals 3.0 through PowerShellGet by running the following PowerShell command:
 ```powershell
-Install-Module -Name DSInternals
+PS> Install-Module -Name DSInternals
 ```
 
 ### Leaked password list
@@ -57,8 +57,11 @@ Installing this framework is as simple as downloading the entire respository. Ho
 * (Optional) Modify the wordlists at '<path>/Accessible/Wordlists/*.txt' to your own liking
 
 ## Usage
-
-Add additional notes about how to deploy this on a live system
+Since the desired options has already been selected during the configuration part of the install-section, you can go ahead and run the script:
+```powershell
+PS> ./Get-bADpassword.ps1
+```
+Note: Please be aware that you need to have privileges equal to that of a Domain Administrator to succesfully fetch passwords from the Active Directory.
 
 ## Authors
 
