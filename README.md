@@ -51,7 +51,7 @@ This file contains a binary packed list of leaked password hashes from the Pwned
 * Place the file in the same folder as the rest of this project
 
 ## Installing
-Installing this framework is really easy - simply download the respository. However, there is some manual configuration required, see below:
+Installing this framework is as simple as downloading the entire respository. However, you have to manually configure the following:
 * Open 'Get-bADpasswords.ps1'
   * Navigate to the configuration-section and modify the variables to fit your needs
 * (Optional) Modify the wordlists at '<path>/Accessible/Wordlists/*.txt' to your own liking
