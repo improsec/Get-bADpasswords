@@ -60,8 +60,10 @@ This file contains a binary packed list of leaked password hashes from the Pwned
 Installing this framework is as simple as downloading the entire respository. However, you have to manually configure the following:
 * Open 'Get-bADpasswords.ps1':
   * Navigate to the configuration-section and modify the variables to fit your needs, at least:
-   * sasd
-    
+   * $strDomain
+   * $naming_context
+   * $mail_smtp
+   * $mail_recipient  
 * (Optional) Modify the wordlists at `./Accessible/Wordlists/*.txt` to your own liking.
 
 ## Usage
