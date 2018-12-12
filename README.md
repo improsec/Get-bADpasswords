@@ -12,6 +12,8 @@ This module is able to compare password hashes of enabled Active Directory users
 * Performs password comparison between users in the Active Directory (i.e. finds shared passwords).
 * Requires 'Domain Admin' privileges or similar, e.g. 'Domain Controller' or delegated Domain-level permissions for both	"Replicating Directory Changes All" and "Replicating Directory Changes All", to succesfully fetch passwords from the Active Directory database.
 
+![picture](https://github.com/improsec/Get-bADpasswords/blob/master/Get-bADpasswords_2.jpg)
+
 ## Dependencies
 
 ### Microsoft Visual C++ Redistributable Package
