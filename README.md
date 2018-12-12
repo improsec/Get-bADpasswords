@@ -87,7 +87,7 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## Authors
 
-* **Jakob H. Heidelberg** ([ZilentJack](https://github.com/ZilentJack)) - *Initial work* - 
+* [**Jakob H. Heidelberg**](https://github.com/ZilentJack)) - *Initial work* - 
 * **Valdemar Carøe** ([VirtualPuppet](https://github.com/VirtualPuppet)) - *Initial work* - 
 * **Nichlas Falk** ([...](https://github.com/...)) - *Initial work* - 
 
