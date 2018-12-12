@@ -1,0 +1,4 @@
+Two new directories will be created here when the script runs.
+
+- one for CSV files "CSVs"
+- one for Log files "Logs"
