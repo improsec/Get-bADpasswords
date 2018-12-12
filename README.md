@@ -15,7 +15,7 @@ Microsoft Visual C++ Redistributable Package is required by our PSI DLL. This DL
   * For 64-bit systems: vc_redist.x64.exe
 * No restart required
 
-#### Microsoft .NET Framework 4.5.1+
+### Microsoft .NET Framework 4.5.1+
 Microsoft .NET Framework 4.5.1+ is required by the DSInternals 3.0 PowerShell module by Michael Grafnetter.
 
 ##### Installation step-by-step
@@ -25,7 +25,7 @@ Microsoft .NET Framework 4.5.1+ is required by the DSInternals 3.0 PowerShell mo
 
 ## Prerequisites
 
-#### DSInternals 3.0 PowerShell Module
+### DSInternals 3.0 PowerShell Module
 This module is used to query the Active Directory and fetch user information (SAM Account Name, E-mail, Password Hash, etc.). The source code for this module can be found [here](https://github.com/MichaelGrafnetter/DSInternals).
 
 ##### Installation step-by-step
