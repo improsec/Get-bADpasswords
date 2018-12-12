@@ -6,10 +6,10 @@ Get insights into the actual strength and quality of passwords in Active Directo
 ## Prerequisites (dependencies)
 
 #### Microsoft Visual C++ Redistributable Package
-**Why?**
+##### Why?
 We use it! wooh!
 
-**How?**
+##### How?
 * Go to [Microsoft Latest Supported Visual C++ Download](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads)
 * Download and install the Visual Studio 2017 version of the Visual C++ Redistributable Package for your target platform
   * For 32-bit systems: vc_redist.x86.exe
