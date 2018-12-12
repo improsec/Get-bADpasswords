@@ -26,7 +26,13 @@ These instructions will get you a copy of the project up and running on your loc
 
 #### DSInternals PowerShell Modules
 
-* Go to [DSInternals Reposity](https://github.com/MichaelGrafnetter/DSInternals) by Michael Grafnetter
+* Go to [DSInternals 3.0 PowerShell Module Download](https://www.powershellgallery.com/packages/DSInternals/3.0)
+* Download and install the DSInternals 3.0 Powershell Modules
+ * Alternatively, just run the following script:
+ ```
+ Install-Module -Name DSInternals
+ ```
+* No restart required
 
 ```
 Example script woohoo!!
@@ -50,34 +56,9 @@ until finished
 
 End with an example of getting some data out of the system or using it for a little demo
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
 ## Deployment
 
 Add additional notes about how to deploy this on a live system
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
 
@@ -92,4 +73,4 @@ This project is licensed under the BSD 3-Clause License - see the [LICENSE.md](L
 ## Acknowledgments
 
 * [Michael Grafnetter](https://github.com/MichaelGrafnetter) for the amazing [DSInternals](https://github.com/MichaelGrafnetter/DSInternals) framework
-* [Troy Hunt](https://github.com/troyhunt) for the amazing [PwnedPasswords list](https://haveibeenpwned.com/Passwords) of leaked password hashes
+* [Troy Hunt](https://github.com/troyhunt) for the amazing [PwnedPasswords list](https://haveibeenpwned.com/Passwords)
