@@ -75,12 +75,6 @@ Give an example
 
 Add additional notes about how to deploy this on a live system
 
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
 ## Contributing
 
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
@@ -97,5 +91,5 @@ This project is licensed under the BSD 3-Clause License - see the [LICENSE.md](L
 
 ## Acknowledgments
 
-* [Michael Grafnetter](https://github.com/MichaelGrafnetter) for the amazing DSInternals framework
+* [Michael Grafnetter](https://github.com/MichaelGrafnetter) for the amazing [DSInternals](https://github.com/MichaelGrafnetter/DSInternals) framework
 * [Troy Hunt](https://github.com/troyhunt) for the amazing PwnedPasswords list of leaked password hashes
