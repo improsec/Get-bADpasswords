@@ -11,7 +11,9 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 #### Microsoft Visual C++ Redistributable Package for Visual Studio 2017
 * Go to [Microsoft Latest Supported Visual C++ Download](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads)
-* Download the latest version of Visual C++ Redistributable Package for Visual Studio 2017
+* Download the Visual Studio 2017 version of the Visual C++ Redistributable Package for your target platform
+..* For 32-bit systems: vc_redist.x86.exe
+..* For 64-bit systems: vc_redist.x64.exe
 
 What things you need to install the software and how to install them
 
