@@ -28,10 +28,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 * Go to [DSInternals 3.0 PowerShell Module Download](https://www.powershellgallery.com/packages/DSInternals/3.0)
 * Download and install the DSInternals 3.0 Powershell Modules
-  * Alternatively, just run the following script:
-    ```
-    Install-Module -Name DSInternals
-    ```
+  * Alternatively, run the following PowerShellGet command through PowerShell:
+```
+Install-Module -Name DSInternals
+```
 * No restart required
 
 ```
