@@ -7,7 +7,9 @@ Get insights into the actual strength and quality of passwords in Active Directo
 This module is able to compare password hashes of enabled Active Directory users against bad/weak/non-compliant passwords (e.g. hackers first guess in brute-force attacks).
 * Performs comparison against one or multiple wordlist(s).
   * This script does not transform input from the wordlists (such as transforming between upper/lower case). Each input from the wordlist is used as-is. Use other tools to generate more specialized wordlists if necessary.
-* Performs additional comparison against previously leaked passwords.
+* Performs additional comparison against publicly leaked passwords.
+* Performs password comparison against 'null' in the Active Directory (i.e. finds empty/null passwords)
+* Performs password comparison between users in the Active Directory (i.e. finds shared passwords)
 * Requires privileges equal to (or higher than) that of 'Domain Admin' or 'Domain Controller' to succesfully fetch passwords from the Active Directory.
 
 ## Dependencies
