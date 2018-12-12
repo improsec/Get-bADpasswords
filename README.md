@@ -3,7 +3,7 @@
 
 Get insights into the actual strength and quality of passwords in Active Directory.
 
-## Prerequisites (dependencies)
+## Dependencies
 
 #### Microsoft Visual C++ Redistributable Package
 Microsoft Visual C++ Redistributable Package is required by our PSI DLL. This DLL is reponsible for parsing the leaked-password binary file and performing comparisons against it. The source code for the DLL can be found [here](./Source).
@@ -16,12 +16,14 @@ Microsoft Visual C++ Redistributable Package is required by our PSI DLL. This DL
 * No restart required
 
 #### Microsoft .NET Framework 4.5.1+
-Microsoft .NET Framework 4.5.1+ is required by the DSInternals 3.0 PowerShell module by Michael Grafnetter. 
+Microsoft .NET Framework 4.5.1+ is required by the DSInternals 3.0 PowerShell module by Michael Grafnetter. This PowerShell module is used to fetch user information from the Active Directory database. The source code for the module can be found [here](https://github.com/MichaelGrafnetter/DSInternals).
 
 ##### Step-by-step
 * Go to [Microsoft .NET Framework 4.5 Download](https://www.microsoft.com/en-us/download/details.aspx?id=30653)
 * Download and install the .NET Framework 4.5 in your preferred language
 * (Restart? No restart?) required
+
+## Prerequisites (dependencies)
 
 #### DSInternals 3.0 PowerShell Modules
 
