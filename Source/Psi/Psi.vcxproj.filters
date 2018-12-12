@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{e2cf1ecc-38c2-450c-bef0-194f0cc5cbd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scanner">
+      <UniqueIdentifier>{e2278566-1b98-47cd-878b-51e526e8d980}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="container">
+      <UniqueIdentifier>{38f62238-3467-4e7a-8fb5-48d55024ed6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="file">
+      <UniqueIdentifier>{172a4bfb-548d-4d9d-8d39-3a0cc9deb6c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utility">
+      <UniqueIdentifier>{bc46011e-92d8-46a7-a7fe-70b2bbd8d1d5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="hash_scanner.cpp">
+      <Filter>scanner</Filter>
+    </ClCompile>
+    <ClCompile Include="bstr_vector.cpp">
+      <Filter>container</Filter>
+    </ClCompile>
+    <ClCompile Include="hash_file.cpp">
+      <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="utility.cpp">
+      <Filter>utility</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="hash_scanner.hpp">
+      <Filter>scanner</Filter>
+    </ClInclude>
+    <ClInclude Include="hash_file.hpp">
+      <Filter>file</Filter>
+    </ClInclude>
+    <ClInclude Include="bstr_vector.hpp">
+      <Filter>container</Filter>
+    </ClInclude>
+    <ClInclude Include="utility.hpp">
+      <Filter>utility</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
