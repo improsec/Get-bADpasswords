@@ -7,9 +7,12 @@ Get insights into the actual strength and quality of passwords in Active Directo
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
 
-#### Swiggity
+### Prerequisites
+#### Microsoft Visual C++ Redistributable Package for Visual Studio 2017
+* Go to [swiggity linkity](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads)
+* Download the latest version of Visual C++ Redistributable Package for Visual Studio 2017
+
 What things you need to install the software and how to install them
 
 ```
