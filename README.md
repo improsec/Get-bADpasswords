@@ -10,7 +10,7 @@ This module is able to compare password hashes of enabled Active Directory users
 * Performs additional comparison against publicly leaked passwords.
 * Performs password comparison against 'null' in the Active Directory (i.e. finds empty/null passwords)
 * Performs password comparison between users in the Active Directory (i.e. finds shared passwords)
-* Requires privileges equal to (or higher than) that of 'Domain Admin' or 'Domain Controller' to succesfully fetch passwords from the Active Directory.
+* Requires privileges equal to (or higher than) that of a 'Domain Admin' or 'Domain Controller' to succesfully fetch passwords from the Active Directory.
 
 ## Dependencies
 
