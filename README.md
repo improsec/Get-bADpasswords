@@ -92,4 +92,4 @@ This project is licensed under the BSD 3-Clause License - see the [LICENSE.md](L
 ## Acknowledgments
 
 * [Michael Grafnetter](https://github.com/MichaelGrafnetter) for the amazing [DSInternals](https://github.com/MichaelGrafnetter/DSInternals) framework
-* [Troy Hunt](https://github.com/troyhunt) for the amazing PwnedPasswords list of leaked password hashes
+* [Troy Hunt](https://github.com/troyhunt) for the amazing [PwnedPasswords list](https://haveibeenpwned.com/Passwords) of leaked password hashes
