@@ -3,12 +3,7 @@
 
 Get insights into the actual strength and quality of passwords in Active Directory.
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-
-### Prerequisites
+## Dependencies
 
 #### Microsoft Visual C++ Redistributable Package
 
@@ -24,7 +19,7 @@ These instructions will get you a copy of the project up and running on your loc
 * Download and install the .NET Framework 4.5 in your preferred language
 * (Restart? No restart?) required
 
-#### DSInternals PowerShell Modules
+#### DSInternals 3.0 PowerShell Modules
 
 * Go to [DSInternals 3.0 PowerShell Module Download](https://www.powershellgallery.com/packages/DSInternals/3.0)
 * Download and install the DSInternals 3.0 Powershell Modules
@@ -40,7 +35,7 @@ Install-Module -Name DSInternals
 Example script woohoo!!
 ```
 
-### Installing
+## Installing
 
 A step by step series of examples that tell you how to get a development env running
 
