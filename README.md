@@ -47,7 +47,7 @@ This file contains a binary packed list of leaked password hashes from the Pwned
 ##### Installation step-by-step
 * Go to [Improsec Leaked Password List](https://improsec-my.sharepoint.com/:u:/p/jhh/EdyYIoFELcZBle_0OQX6D1MB51mgZLZQqNx1ELrBs3D_DQ?e=waNigh)
 * Download the _leaked-passwords.bin_ file
-  * SHA1: 334E236FEA9DB781BE646BB2F80394D9C039BE02
+  * SHA1: `334E236FEA9DB781BE646BB2F80394D9C039BE02`
 * Place the file in the same folder as the rest of this project
 
 ## Installing
