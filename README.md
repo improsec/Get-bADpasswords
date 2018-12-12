@@ -1,11 +1,8 @@
-# Get-bADpasswords
-Get insights into the actual strength and quality of passwords in Active Directory.
-
 ![MIT License](https://img.shields.io/badge/License-MIT-green.svg) ![PowerShell 3 | 4 | 5](https://img.shields.io/badge/PowerShell-3%20|%204%20|%205-0000FF.svg) ![.NET Framework 4.5.1+](https://img.shields.io/badge/.NET%20Framework-4.5.1%2B-007FFF.svg) ![Visual Studio 2017](https://img.shields.io/badge/Visual%20Studio-2017-383278.svg)
 
-# Password Strength Insights
+# Get-bADpasswords
 
-One Paragraph of project description goes here
+Get insights into the actual strength and quality of passwords in Active Directory.
 
 ## Getting Started
 
@@ -40,6 +37,7 @@ End with an example of getting some data out of the system or using it for a lit
 ## Running the tests
 
 Explain how to run the automated tests for this system
+
 
 ### Break down into end to end tests
 
