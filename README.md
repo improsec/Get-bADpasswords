@@ -3,6 +3,9 @@
 
 Get insights into the actual strength and quality of passwords in Active Directory.
 
+## Introduction
+
+
 ## Dependencies
 
 ### Microsoft Visual C++ Redistributable Package
@@ -43,27 +46,20 @@ This file contains a binary packed list of leaked password hashes from the Pwned
 
 ##### Installation step-by-step
 * Go to [Improsec Leaked Password List](https://improsec-my.sharepoint.com/:u:/p/jhh/EdyYIoFELcZBle_0OQX6D1MB51mgZLZQqNx1ELrBs3D_DQ?e=waNigh)
-  * SHA1: 334E236FEA9DB781BE646BB2F80394D9C039BE02
 * Download the _leaked-passwords.bin_ file
+  * SHA1: 334E236FEA9DB781BE646BB2F80394D9C039BE02
 * Place the file in the same folder as the rest of this project
 
 ## Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
+* Install this entire repository
+* (Optional) Modify the wordlists at '<path>/Accessible/Wordlists/*.txt' to your own liking
+* Open 'Get-bADpasswords.ps1'
+  * Navigate to
+```powershell
+# ================ #
+# CONFIGURATION => #
+# ================ #
 ```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Deployment
 
