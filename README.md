@@ -6,7 +6,7 @@ Get insights into the actual strength and quality of passwords in Active Directo
 ## Prerequisites (dependencies)
 
 #### Microsoft Visual C++ Redistributable Package
-Microsoft Visual C++ Redistributable Package is required by our PSI DLL, which is responsible for parsing the leaked-password binary file and performing comparisons against the list.
+Microsoft Visual C++ Redistributable Package is required by our PSI DLL. This DLL is reponsible for parsing the leaked-password binary file and performing comparisons against it. The source code for the DLL can be found [here](./Source).
 
 ##### Step-by-step
 * Go to [Microsoft Latest Supported Visual C++ Download](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads)
@@ -16,6 +16,7 @@ Microsoft Visual C++ Redistributable Package is required by our PSI DLL, which i
 * No restart required
 
 #### Microsoft .NET Framework 4.5.1+
+Microsoft .NET Framework 4.5.1+ is required by the DSInternals 3.0 PowerShell module by Michael Grafnetter. 
 
 ##### Step-by-step
 * Go to [Microsoft .NET Framework 4.5 Download](https://www.microsoft.com/en-us/download/details.aspx?id=30653)
