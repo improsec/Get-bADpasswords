@@ -16,7 +16,7 @@ Microsoft Visual C++ Redistributable Package is required by our PSI DLL. This DL
 * No restart required
 
 #### Microsoft .NET Framework 4.5.1+
-Microsoft .NET Framework 4.5.1+ is required by the DSInternals 3.0 PowerShell module by Michael Grafnetter. This PowerShell module is used to fetch user information from the Active Directory database. The source code for the module can be found [here](https://github.com/MichaelGrafnetter/DSInternals).
+Microsoft .NET Framework 4.5.1+ is required by the DSInternals 3.0 PowerShell module by Michael Grafnetter. This PowerShell module is used to fetch user information from the Active Directory. The source code for the module can be found [here](https://github.com/MichaelGrafnetter/DSInternals).
 
 ##### Installation step-by-step
 * Go to [Microsoft .NET Framework 4.5 Download](https://www.microsoft.com/en-us/download/details.aspx?id=30653)
