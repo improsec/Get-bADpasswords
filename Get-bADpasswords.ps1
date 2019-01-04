@@ -5,7 +5,7 @@
     - Can write log and CSV file output.
     - Must be excuted with 'Domain Admin' or 'Domain Controller' permissions (or equivalent).
     - Version 2.0 also checks for leaked passwords (see Troy Hunt: https://www.troyhunt.com/pwned-passwords-now-as-ntlm-hashes/).
-    
+
     Requires PS Module "DSInternals" to be present on executing host. Please follow install instructions from there.
     - Found here: https://www.powershellgallery.com/packages/DSInternals/
     - More info:  https://www.dsinternals.com/en/
@@ -15,7 +15,7 @@
     - Microsoft Visual C++ Redistributable for Visual Studio 2017 x86/x64 (depending on version).
 
     Note: this script does not modify or permutate input from word lists, like switching to upper/lower case etc. Each word in word list is taken as-is. Use other tools to generate word lists if needed.
-	
+
     License: BSD 3-Clause
 
   .DESCRIPTION
@@ -30,19 +30,19 @@
     Authored by    : Improsec ApS / @Improsec
     Date created   : 01/10-2015
     Last modified  : 12/12-2018
-  
+
     Find us here:
     - https://www.improsec.com
     - https://github.com/improsec
     - https://twitter.com/improsec
     - https://www.facebook.com/improsec
 
-    The very cool DSInternals module is authored by Michael Grafnetter - HUGE THANX to Michael for his great work and help! 
+    The very cool DSInternals module is authored by Michael Grafnetter - HUGE THANX to Michael for his great work and help!
 
     Version history:
     - 1.00 Basic functionality
     - 2.00 Code optimization and added search for leaked password hashes (released on GitHub)
-    
+
     Tested on:
      - WS 2012 R2, WS 2016, WS 2019
 #>
@@ -90,11 +90,11 @@ $psi_library_name = ''
 
 if ([System.Environment]::Is64BitOperatingSystem -and [System.Environment]::Is64BitProcess)
 {
-	$psi_library_name = '.\PSI\Psi_x64.dll'
+	$psi_library_name = '.\\PSI\\Psi_x64.dll'
 }
 else
 {
-	$psi_library_name = '.\PSI\Psi_x86.dll'
+	$psi_library_name = '.\\PSI\\Psi_x86.dll'
 }
 
 # Include a few helper files
@@ -108,7 +108,7 @@ else
 
 # constant(s)
 $empty_nt_hash = '31d6cfe0d16ae931b73c59d7e0c089c0'
-                  
+
 
 # miscellaneous
 $script_version = '2.00'
@@ -149,12 +149,12 @@ Function Find-ArrayItem
         [Parameter(Mandatory=$true)]
 		[string[]]
 		$array,
-	
+
         [Parameter(Mandatory=$true)]
 		[string]
 		$item
 	)
-	
+
 	if ($array -ne $null)
 	{
 		foreach ($object in $array)
@@ -165,7 +165,7 @@ Function Find-ArrayItem
 			}
 		}
 	}
-	
+
 	return $false
 }
 
@@ -206,15 +206,15 @@ catch
 if ($users -ne $null -and $users.count -ge 1)
 {
 	Log-Automatic -string "The AD returned $($users.count) users.`n" -type 'info' -timestamp
- 
+
 	$passwords_empty = 0
 	$passwords_weak = 0
 	$passwords_leak = 0
-	
+
 	# Isolate the user hashes for comparison with weak and leaked passwords
 	$user_hashes = @()
     $usernames_with_empty_passwords = @()
-	
+
 	foreach ($user in $users)
 	{
 		if ($user.NTHashHex -eq $empty_nt_hash)
@@ -223,10 +223,10 @@ if ($users -ne $null -and $users.count -ge 1)
 		}
 		else
 		{
-			$user_hashes += $user.NTHashHex; 
+			$user_hashes += $user.NTHashHex;
 		}
 	}
-	
+
 	# Test for weak passwords
 	$weak_passwords = @{}
 
@@ -242,14 +242,14 @@ if ($users -ne $null -and $users.count -ge 1)
 
 	# Test for leak passwords
 	$leak_passwords = @()
-	
+
 	Test-LeakPasswords -sources $leak_password_files -user_hashes $user_hashes -results ([ref]$leak_passwords)
-	
+
 	# Compare results with user accounts
 	$users_with_weak_passwords = ''
 	$users_with_leak_passwords = ''
 	$users_with_empty_passwords = ''
-	
+
     foreach ($username in $usernames_with_empty_passwords)
     {
 		$passwords_empty++
@@ -269,7 +269,7 @@ if ($users -ne $null -and $users.count -ge 1)
 		{
 			$passwords_weak++;
 			$users_with_weak_passwords += "$($user.SamAccountName); "
-			
+
 			if ($log_weak_passwords)
 			{
 				Log-Automatic -string "Weak password found for user: '$($user.SamAccountName)' = '$($weak_passwords[$user.NTHashHex])'" -type 'info' -timestamp
@@ -278,7 +278,7 @@ if ($users -ne $null -and $users.count -ge 1)
 			{
 				Log-Automatic -string "Weak password found for user: '$($user.SamAccountName)'" -type 'info' -timestamp
 			}
-			
+
 			if ($write_to_csv_file)
 			{
 				Log-Specific -filename $csv_filename -string "weak;$($user.SamAccountName);$($user.NTHashHex)"
@@ -288,21 +288,21 @@ if ($users -ne $null -and $users.count -ge 1)
 		{
 			$passwords_leak++;
 			$users_with_leak_passwords += "$($user.SamAccountName); "
-			
+
 			Log-Automatic -string "Leak password found for user: '$($user.SamAccountName)'" -type 'info' -timestamp
-				
+
 			if ($write_to_csv_file)
 			{
 				Log-Specific -filename $csv_filename -string "leak;$($user.SamAccountName);$($user.NTHashHex)"
 			}
 		}
 	}
-	
+
 	Log-Automatic -string " "
 	Log-Automatic -string "Found a total of '$passwords_empty' user(s) with empty passwords" -type 'info' -timestamp
 	Log-Automatic -string "Found a total of '$passwords_weak' user(s) with weak passwords" -type 'info' -timestamp
 	Log-Automatic -string "Found a total of '$passwords_leak' user(s) with leak passwords" -type 'info' -timestamp
-	
+
 	# Test for shared passwords
 	$shared_passwords = $users | Select-Object SamAccountName,NTHashHex | Group-Object -Property NTHashHex | Where-Object {$_.Count -gt 1}
 	$shared_info = $shared_passwords | Measure-Object -Property 'count' -Sum
@@ -322,25 +322,25 @@ if ($users -ne $null -and $users.count -ge 1)
 	$mail_body += "Leak passwords found: '$passwords_leak' ($([Math]::round((($passwords_leak / $users.count) * 100)))%)`n"
 	$mail_body += "Number of passwords shared: '$($shared_info.count)' ($([Math]::round((($($shared_info.count) / $users.count) * 100)))%)`n"
 	$mail_body += "Number of users sharing passwords: '$($shared_info.sum)' ($([Math]::round((($($shared_info.sum) / $users.count) * 100)))%)`n`n"
-	
+
 	$mail_body += "Users with empty passwords:`n"
 	$mail_body += "$users_with_empty_passwords`n`n"
 
 	$mail_body += "Users with weak passwords:`n"
 	$mail_body += "$users_with_weak_passwords`n`n"
-	
+
 	$mail_body += "Users with leak passwords:`n"
 	$mail_body += "$users_with_leak_passwords`n`n"
-	
+
 	$mail_body += "Users sharing passwords:`n"
-	
+
 	$temp_counter = 0
 
 	foreach ($password in $shared_passwords_present)
 	{
 		$mail_body += "$((++$temp_counter)) : $password`n"
 	}
-	
+
 	Send-MailMessage -From $mail_sender -To $mail_recipient -Subject $mail_subject -Body $mail_body -SmtpServer $mail_smtp -Attachments $log_filename
 }
 else
