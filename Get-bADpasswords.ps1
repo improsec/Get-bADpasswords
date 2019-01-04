@@ -57,7 +57,7 @@ $naming_context = 'DC=AD,DC=IMPROSEC,DC=COM'
 
 # Files
 $weak_password_files = @('.\Accessible\Wordlists\BadPasswords.txt', '.\Accessible\Wordlists\BadCustom.txt')
-$leak_password_files = @('leaked-passwords.bin')
+$leak_password_files = @('.\leaked-passwords.bin')
 
 # Logging
 $current_timestamp = Get-Date -Format ddMMyyyy-HHmmss
@@ -111,7 +111,7 @@ $empty_nt_hash = '31d6cfe0d16ae931b73c59d7e0c089c0'
 
 
 # miscellaneous
-$script_version = '2.00'
+$script_version = '2.01'
 
 # ================ #
 # FUNCTIONS =====> #
