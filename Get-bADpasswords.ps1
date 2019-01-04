@@ -41,8 +41,8 @@
 
     Version history:
     - 1.00 Basic functionality
-	- 2.00 Code optimization and added search for leaked password hashes (released on GitHub)
-	- 2.01 Fix path escape issue, preventing DLL from loading
+    - 2.00 Code optimization and added search for leaked password hashes (released on GitHub)
+    - 2.01 Fix path escape issue, preventing DLL from loading
 
     Tested on:
      - WS 2012 R2, WS 2016, WS 2019
