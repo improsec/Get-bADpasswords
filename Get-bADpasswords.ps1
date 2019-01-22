@@ -90,11 +90,11 @@ $psi_library_name = ''
 
 if ([System.Environment]::Is64BitOperatingSystem -and [System.Environment]::Is64BitProcess)
 {
-	$psi_library_name = '.\PSI\Psi_x64.dll'
+	$psi_library_name = '.\\PSI\\Psi_x64.dll'
 }
 else
 {
-	$psi_library_name = '.\PSI\Psi_x86.dll'
+	$psi_library_name = '.\\PSI\\Psi_x86.dll'
 }
 
 # Include a few helper files
