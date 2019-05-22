@@ -1,3 +1,12 @@
+
+# A few helper functions
+#
+# Find us here:
+# - https://www.improsec.com
+# - https://github.com/improsec
+# - https://twitter.com/improsec
+# - https://www.facebook.com/improsec
+
 # ================ #
 # CONFIGURATION => #
 # ================ #
