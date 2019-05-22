@@ -1,3 +1,0 @@
-CustomWords
-Pa$$w0rd
-Test0
