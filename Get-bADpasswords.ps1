@@ -1,4 +1,3 @@
-
 # A few helper functions
 #
 # Find us here:
