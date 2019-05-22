@@ -1,2 +1,5 @@
 Administrators
 DnsAdmins
+Domain Admins
+Enterprise Admins
+Schema Admins
