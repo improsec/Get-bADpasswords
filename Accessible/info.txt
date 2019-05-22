@@ -2,3 +2,7 @@ Two new directories will be created here when the script runs.
 
 - one for CSV files "CSVs"
 - one for Log files "Logs"
+
+The 'PasswordLists' directory contains all the password lists used for comparison against passwords.
+
+The 'AccountGroups' directory contains all the privilege groups that users will be categorized by during reporting. Please note that the format is "# - GN", where '#' is a number and 'GN' is the name you would like to report the privilege level as. A user may only be categorized by one privilege level, so the number in the file convention is used solely to specify the order for comparison so that higher privilege levels are categorized before lower privilege levels.
