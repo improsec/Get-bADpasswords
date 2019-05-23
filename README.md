@@ -47,7 +47,7 @@ This module is used to query the Active Directory and fetch user information (SA
 
 Alternatively, you can install DSInternals 3.0 through PowerShellGet by running the following PowerShell command:
 ```powershell
-PS> Install-Module -Name DSInternals
+PS> Install-Module -Name DSInternals -Scope AllUsers
 ```
 
 ### Leaked password list
