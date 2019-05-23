@@ -59,8 +59,8 @@ if ([System.Environment]::Is64BitOperatingSystem -and [System.Environment]::Is64
 }
 
 # include helper files
-. '.\Helper_Logging'
-. '.\Helper_Passwords'
+. '.\Helper_Logging.ps1'
+. '.\Helper_Passwords.ps1'
 
 # ================ #
 # VARIABLES =====> #
