@@ -118,7 +118,7 @@ if ($write_hash_to_logs) {
 $domain_controller_fqdn = Get-AliveDomainController -name $domain_name
 
 if (!($domain_controller_fqdn)) {
-    Log-Automatic -string "A live Domain Controller in '$domain_name' was not found. Exiting.`n" -type 'info' -timestamp
+    Log-Automatic -string "A live Domain Controller in '$domain_name' was not found. Exiting." -type 'info' -timestamp
     exit
 }
 
@@ -144,7 +144,7 @@ if (($ad_users -eq $null) -or ($ad_users.Count -le 0)) {
 	Log-Automatic -string "The AD returned no users - no comparisons can be performed." -type 'fail' -timestamp
     exit
 } else {
-	Log-Automatic -string "The AD returned $($ad_users.count) users.`n" -type 'info' -timestamp
+	Log-Automatic -string "The AD returned $($ad_users.count) users." -type 'info' -timestamp
     
     foreach ($group_file in (Get-ChildItem $group_folder -Filter '*.txt')) {
         foreach ($group in (Get-Content -Path $group_file.FullName)) {
@@ -204,7 +204,7 @@ $shared_passwords_info = $shared_passwords | measure -Property Count -Sum
 
 # =========== Report results ===========
 if (($users_with_empty_password -ne $null) -and ($users_with_empty_password.Count -gt 0)) {
-	Log-Automatic -string "`nFound $($users_with_empty_password.Count) user(s) with empty passwords." -type 'info' -timestamp
+	Log-Automatic -string "Found $($users_with_empty_password.Count) user(s) with empty passwords." -type 'info' -timestamp
 
     foreach ($user in $users_with_empty_password) {
 	    Log-Automatic -string "Empty password found for user '$($user.SamAccountName)'." -type 'info' -timestamp
@@ -216,7 +216,7 @@ if (($users_with_empty_password -ne $null) -and ($users_with_empty_password.Coun
 }
 
 if (($user_matches -ne $null) -and ($user_matches.Count -gt 0)) {
-	Log-Automatic -string "`nFound $($user_matches.Count) user(s) with weak passwords." -type 'info' -timestamp
+	Log-Automatic -string "Found $($user_matches.Count) user(s) with weak passwords." -type 'info' -timestamp
 
     foreach ($user in $user_matches) {
         $files = "'$((Get-Item -Path $user.PasswordFiles).BaseName -join ""','"")'"
@@ -233,7 +233,7 @@ if (($user_matches -ne $null) -and ($user_matches.Count -gt 0)) {
 }
 
 if (($shared_passwords -ne $null) -and ($shared_passwords.Count -gt 0)) {
-	Log-Automatic -string "`nFound $($shared_passwords_info.Sum) user(s) sharing $($shared_passwords_info.Count) passwords." -type 'info' -timestamp
+	Log-Automatic -string "Found $($shared_passwords_info.Sum) user(s) sharing $($shared_passwords_info.Count) passwords." -type 'info' -timestamp
 
     foreach ($password in $shared_passwords) {
         $names = "'$($password.SamAccountName -join ""','"")'"
@@ -256,7 +256,7 @@ if (($shared_passwords -ne $null) -and ($shared_passwords.Count -gt 0)) {
     }
 }
 
-Log-Automatic -string "`nFound a total of '$($users_with_empty_password.Count)' user(s) with empty passwords" -type 'info' -timestamp
+Log-Automatic -string "Found a total of '$($users_with_empty_password.Count)' user(s) with empty passwords" -type 'info' -timestamp
 Log-Automatic -string "Found a total of '$($user_matches.Count)' user(s) with weak passwords" -type 'info' -timestamp
 Log-Automatic -string "Found a total of '$($shared_passwords_info.Sum)' user(s) with shared passwords" -type 'info' -timestamp
 
@@ -353,8 +353,6 @@ if ($send_log_file) {
 if ($send_csv_file) {
     $attachments += $csv_filename
 }
-
-Write-host "`n$mail_body"
 
 Send-MailMessage -From $mail_sender -To $mail_recipient -Subject $mail_subject -Body $mail_body -SmtpServer $mail_smtp -Attachments $attachments
 exit
