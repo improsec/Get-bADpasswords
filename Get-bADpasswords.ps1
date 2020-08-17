@@ -106,7 +106,7 @@ clear
 
 Log-Automatic -string "Version:`t'$script_name v$script_version'." -type 'info' -timestamp
 Log-Automatic -string "Log file:`t'$log_filename'." -type 'info' -timestamp
-Log-Automatic -string "CSV file:`t'$csv_filename'.`n" -type 'info' -timestamp
+Log-Automatic -string "CSV file:`t'$csv_filename'." -type 'info' -timestamp
 
 if ($write_hash_to_logs) {
     Log-Specific -filename $csv_filename -string "Activity;Password Type;Account Type;Account Name;Account SID;Account password hash;Present in password list(s)"
@@ -129,7 +129,7 @@ Log-Automatic -string "Testing versioning for files in '$password_folder'..." -t
 Get-RepackFiles -files (Get-ChildItem $password_folder -Filter '*.txt')
 
 # =========== Query AD user data ===========
-Log-Automatic -string "`nReplicating AD user data with parameters (DC = '$domain_controller', NC = '$naming_context')..." -type 'info' -timestamp
+Log-Automatic -string "Replicating AD user data with parameters (DC = '$domain_controller', NC = '$naming_context')..." -type 'info' -timestamp
 
 $ad_users = $null
 
