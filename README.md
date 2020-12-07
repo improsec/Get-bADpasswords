@@ -10,7 +10,7 @@ This module is able to compare password hashes of enabled Active Directory users
 * Performs additional comparison against publicly leaked passwords, see acknowledgements below.
 * Performs password comparison against 'null' in the Active Directory (i.e. finds empty/null passwords).
 * Performs password comparison between users in the Active Directory (i.e. finds shared passwords).
-* Requires 'Domain Admin' privileges or similar, e.g. 'Domain Controller' or delegated Domain-level permissions for both	"Replicating Directory Changes All" and "Replicating Directory Changes All", to succesfully fetch passwords from the Active Directory database.
+* Requires 'Domain Admin' privileges or similar, e.g. 'Domain Controller' or delegated Domain-level permissions for both	"Replicating Directory Changes" and "Replicating Directory Changes All", to succesfully fetch passwords from the Active Directory database.
 * Choose a Domain Controller or a member server (will become a Tier 0 system) for executing the script, e.g. as a Scheduled Task.
 
 ![picture](https://github.com/improsec/Get-bADpasswords/blob/master/Get-bADpasswords_2.jpg)
