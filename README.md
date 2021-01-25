@@ -51,12 +51,12 @@ PS> Install-Module -Name DSInternals -Scope AllUsers
 ```
 
 ### Leaked password list
-This file contains a binary packed list of leaked password hashes from the PwnedPasswords list published by Troy Hunt. The file is too big (8.5 GB) for GitHub (max 25 MB), so we host it on our SharePoint instead. 
+This file contains a binary packed list of leaked password hashes from the PwnedPasswords list published by Troy Hunt. The file is too big (9.5 GB) for GitHub (max 25 MB), so we host it on our SharePoint instead. 
 
 ##### Installation step-by-step
-* Go to [Improsec Leaked Password List](https://improsec-my.sharepoint.com/:u:/p/vca/EfkYRlAhwlNKuoKOKA6ZG2sByZKnVXfz9bk1vpAFlILxow).
-* Download the _leaked-passwords-v6.bin_ file:
-  * SHA1: `11f8f33715f76b912328ed688af99c97d42eb3e5`.
+* Go to [Improsec Leaked Password List](https://improsec-my.sharepoint.com/:u:/p/vca/Ef3PPO-QAPFClNzBa6cxhaMBPvZ4zqaPm7Ad0o3auKso_g).
+* Download the _leaked-passwords-v7.bin_ file:
+  * SHA1: `f1db968063e9a7f080f2f65252c6274dae8eb233`.
 * Place the file in the `./Accessible/PasswordLists/` folder.
 
 ## Installation
