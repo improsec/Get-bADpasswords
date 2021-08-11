@@ -24,8 +24,12 @@ $current_timestamp = Get-Date -Format ddMMyyyy-HHmmss
 $log_filename  = ".\Accessible\Logs\log_$domain_name-$current_timestamp.txt"
 $csv_filename  = ".\Accessible\CSVs\exported_$domain_name-$current_timestamp.csv"
 
+$event_log = "Improsec Password Audit"
+$event_source = "Improsec"
+
 $write_to_log_file = $true
 $write_to_csv_file = $true
+$write_to_eventlog = $false
 $write_hash_to_logs = $false
 
 # Result email dispatch information
@@ -40,6 +44,10 @@ $send_csv_file = $true
 # ================ #
 # PREPROCESSING => #
 # ================ #
+
+if ($write_to_eventlog) {
+    New-EventLog -Source $event_source -LogName $event_log > $null
+}
 
 $current_directory = Split-Path $MyInvocation.MyCommand.Path
 [System.IO.Directory]::SetCurrentDirectory($current_directory) > $null
@@ -111,9 +119,9 @@ Log-Automatic -string "CSV file:`t'$csv_filename'." -type 'info' -timestamp
 Log-Specific -filename $csv_filename -string "sep=;"
 
 if ($write_hash_to_logs) {
-    Log-Specific -filename $csv_filename -string "Activity;Password Type;Account Type;Account Name;Account SID;Account password hash;Present in password list(s)"
+    Log-Specific -filename $csv_filename -string "Activity;Password Type;Account Type;Account Name;Account SID;Enabled;Path;Account password hash;Present in password list(s)"
 } else {
-    Log-Specific -filename $csv_filename -string "Activity;Password Type;Account Type;Account Name;Account SID;Present in password list(s)"
+    Log-Specific -filename $csv_filename -string "Activity;Password Type;Account Type;Account Name;Account SID;Enabled;Path;Present in password list(s)"
 }
 
 # =========== Query domain data ===========
@@ -136,29 +144,38 @@ Log-Automatic -string "Replicating AD user data with parameters (DC = '$domain_c
 $ad_users = $null
 
 try {
-    $ad_users = Get-ADReplAccount -All -Server $domain_controller -NamingContext $naming_context | where { $_.SamAccountType -eq 'User' } | select SamAccountName,SID,Enabled,@{ N="NtHash"; E={ ConvertTo-Hex $_.NTHash }},@{ N="Activity"; E={ if ($_.Enabled) { 'active' } else { 'inactive' } }},@{ N="PrivilegeType"; E={ 'regular' }}
+    $ad_users = Get-ADReplAccount -All -Server $domain_controller -NamingContext $naming_context | where { $_.SamAccountType -eq 'User' } | select SamAccountName,DistinguishedName,SID,Enabled,@{ N="NtHash"; E={ ConvertTo-Hex $_.NTHash }},@{ N="Path"; E={ '' }},@{ N="Activity"; E={ if ($_.Enabled) { 'active' } else { 'inactive' } }},@{ N="PrivilegeType"; E={ 'regular' }}
 } catch {
-	Log-Automatic -string $_.Exception.Message -type 'fail' -timestamp
-	exit
+    Log-Automatic -string $_.Exception.Message -type 'fail' -timestamp
+    exit
 }
 
 if (($ad_users -eq $null) -or ($ad_users.Count -le 0)) {
-	Log-Automatic -string "The AD returned no users - no comparisons can be performed." -type 'fail' -timestamp
+    Log-Automatic -string "The AD returned no users - no comparisons can be performed." -type 'fail' -timestamp
     exit
 } else {
-	Log-Automatic -string "The AD returned $($ad_users.count) users." -type 'info' -timestamp
+    Log-Automatic -string "The AD returned $($ad_users.count) users." -type 'info' -timestamp
     
-    foreach ($group_file in (Get-ChildItem $group_folder -Filter '*.txt')) {
-        foreach ($group in (Get-Content -Path $group_file.FullName)) {
-            $group_identity = ($group_file.BaseName -split ' - ')[1].ToLower()
-            $members = Get-ADGroupMember -Identity $group -Recursive | select -ExpandProperty SID
+    foreach ($user in $ad_users) {
+        $tmp = Get-ADUser $user.Sid -Properties AccountExpirationDate,CanonicalName
+        $user.Path = $tmp.CanonicalName
 
-            foreach ($user in $ad_users) {
-                if (($members -contains $user.SID) -and ($user.PrivilegeType -eq 'regular')) {
-                    $user.PrivilegeType = $group_identity
-                }
-            }
+        if (($user.Enabled) -and ($tmp -ne $null) -and ($tmp.AccountExpirationDate -ne $null) -and ($tmp.AccountExpirationDate -le (Get-Date))) {
+            $user.Activity = 'inactive'
         }
+    }
+
+    foreach ($group_file in (Get-ChildItem $group_folder -Filter '*.txt')) {
+	foreach ($group in (Get-Content -Path $group_file.FullName)) {
+	    $group_identity = ($group_file.BaseName -split ' - ')[1].ToLower()
+	    $members = Get-ADGroupMember -Identity $group -Recursive | select -ExpandProperty SID
+
+	    foreach ($user in $ad_users) {
+		if (($members -contains $user.SID) -and ($user.PrivilegeType -eq 'regular')) {
+		    $user.PrivilegeType = $group_identity
+		}
+	    }
+	}
     }
 }
 
@@ -183,7 +200,7 @@ $user_matches = @()
 
 foreach ($result in $results) {
     $pair = $result -split '\;'
-    $user_matches += @($users_with_valid_password | where { $_.NtHash -eq $pair[0] } | select Enabled,Activity,PrivilegeType,SamAccountName,SID,NtHash,@{ N="PasswordFiles"; E={ @($pair[1] -split '\|') }})
+    $user_matches += @($users_with_valid_password | where { $_.NtHash -eq $pair[0] } | select Enabled,Activity,PrivilegeType,SamAccountName,SID,NtHash,Path,@{ N="PasswordFiles"; E={ @($pair[1] -split '\|') }})
 }
 
 $file_matches = @{}
@@ -201,7 +218,7 @@ foreach ($user in $user_matches) {
 }
 
 # =========== Test for shared passwords ===========
-$shared_passwords = $users_with_valid_password | group -Property NtHash | where { $_.Count -gt 1 } | sort -Descending -Property Count | select Count,@{N="Enabled";E={ $_.Group.Enabled }},@{N="Activity";E={ $_.Group.Activity }},@{N="PrivilegeType";E={ $_.Group.PrivilegeType }},@{N="SamAccountName";E={ $_.Group.SamAccountName }},@{N="SID";E={ $_.Group.SID }},@{N="NtHash";E={ $_.Name }}
+$shared_passwords = $users_with_valid_password | group -Property NtHash | where { $_.Count -gt 1 } | sort -Descending -Property Count | select Count,@{N="Enabled";E={ $_.Group.Enabled }},@{N="Activity";E={ $_.Group.Activity }},@{N="PrivilegeType";E={ $_.Group.PrivilegeType }},@{N="SamAccountName";E={ $_.Group.SamAccountName }},@{N="SID";E={ $_.Group.SID }},@{N="NtHash";E={ $_.Group.NtHash }},@{N="Path";E={ $_.Group.Path }}
 $shared_passwords_info = $shared_passwords | measure -Property Count -Sum
 
 # =========== Report results ===========
@@ -209,28 +226,36 @@ if (($users_with_empty_password -ne $null) -and ($users_with_empty_password.Coun
 	Log-Automatic -string "Found $($users_with_empty_password.Count) user(s) with empty passwords." -type 'info' -timestamp
 
     foreach ($user in $users_with_empty_password) {
-	    Log-Automatic -string "Empty password found for user '$($user.SamAccountName)'." -type 'info' -timestamp
+        Log-Automatic -string "Empty password found for user '$($user.SamAccountName)'." -type 'info' -timestamp
 
 	    if ($write_to_csv_file) {
-            Log-Specific -filename $csv_filename -string "$($user.Activity);empty;$($user.PrivilegeType);$($user.SamAccountName);$($user.SID)"
+            Log-Specific -filename $csv_filename -string "$($user.Activity);empty;$($user.PrivilegeType);$($user.SamAccountName);$($user.SID);$($user.Enabled);$($user.Path)"
 	    }
+
+        if ($write_to_eventlog) {
+            Write-EventLog -Source $event_source -LogName $event_log -EntryType Warning -EventID 13371 -Message "Empty password found for user: $($user.SamAccountName)"
+        }
     }
 }
 
 if (($user_matches -ne $null) -and ($user_matches.Count -gt 0)) {
-	Log-Automatic -string "Found $($user_matches.Count) user(s) with weak passwords." -type 'info' -timestamp
+    Log-Automatic -string "Found $($user_matches.Count) user(s) with weak passwords." -type 'info' -timestamp
 
     foreach ($user in $user_matches) {
         $files = "'$((Get-Item -Path $user.PasswordFiles).BaseName -join ""','"")'"
-	    Log-Automatic -string "Matched password found for user '$($user.SamAccountName)' in list(s) $files." -type 'info' -timestamp
+        Log-Automatic -string "Matched password found for user '$($user.SamAccountName)' in list(s) $files." -type 'info' -timestamp
 
-	    if ($write_to_csv_file) {
+        if ($write_to_csv_file) {
             if ($write_hash_to_logs) {
-		        Log-Specific -filename $csv_filename -string "$($user.Activity);weak;$($user.PrivilegeType);$($user.SamAccountName);$($user.SID);$($user.NtHash);$files"
+                Log-Specific -filename $csv_filename -string "$($user.Activity);weak;$($user.PrivilegeType);$($user.SamAccountName);$($user.SID);$($user.Enabled);$($user.Path);$($user.NtHash);$files"
             } else {
-		        Log-Specific -filename $csv_filename -string "$($user.Activity);weak;$($user.PrivilegeType);$($user.SamAccountName);$($user.SID);$files"
+                Log-Specific -filename $csv_filename -string "$($user.Activity);weak;$($user.PrivilegeType);$($user.SamAccountName);$($user.SID);$($user.Enabled);$($user.Path);$files"
             }
-	    }
+        }
+
+        if ($write_to_eventlog) {
+            Write-EventLog -Source $event_source -LogName $event_log -EntryType Warning -EventID 13372 -Message "Weak password found for user: $($user.SamAccountName)"
+        }
     }
 }
 
@@ -243,22 +268,26 @@ if (($shared_passwords -ne $null) -and ($shared_passwords.Count -gt 0)) {
         $names = "'$($password.SamAccountName -join ""','"")'"
 
         if ($write_hash_to_logs) {
-	        Log-Automatic -string "Hash '$($password.NtHash)' is shared by user(s): $names." -type 'info' -timestamp
+            Log-Automatic -string "Hash '$($password.NtHash)' is shared by user(s): $names." -type 'info' -timestamp
         } else {
-	        Log-Automatic -string "A single hash is shared by user(s): $names." -type 'info' -timestamp
+            Log-Automatic -string "A single hash is shared by user(s): $names." -type 'info' -timestamp
         }
 
         if ($write_to_csv_file) {
             for ($i = 0; $i -lt $password.Count; $i++) {
                 if ($write_hash_to_logs) {
-                    Log-Specific -filename $csv_filename -string "$($password.Activity[$i]);shared;$($password.PrivilegeType[$i]);$($password.SamAccountName[$i]);$($password.SID[$i]);$($password.NtHash);$tmp"
+                    Log-Specific -filename $csv_filename -string "$($password.Activity[$i]);shared;$($password.PrivilegeType[$i]);$($password.SamAccountName[$i]);$($password.SID[$i]);$($password.Enabled[$i]);$($password.Path[$i]);$($password.NtHash);$tmp"
                 } else {
-                    Log-Specific -filename $csv_filename -string "$($password.Activity[$i]);shared;$($password.PrivilegeType[$i]);$($password.SamAccountName[$i]);$($password.SID[$i]);$tmp"
+                    Log-Specific -filename $csv_filename -string "$($password.Activity[$i]);shared;$($password.PrivilegeType[$i]);$($password.SamAccountName[$i]);$($password.SID[$i]);$($password.Enabled[$i]);$($password.Path[$i]);$tmp"
                 }
             }
         }
+
+        if ($write_to_eventlog) {
+            Write-EventLog -Source $event_source -LogName $event_log -EntryType Warning -EventID 13373 -Message "A single password is shared by users: $names"
+        }
 	
-	$tmp++;
+        $tmp++;
     }
 }
 
