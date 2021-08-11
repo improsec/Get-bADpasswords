@@ -235,8 +235,10 @@ if (($user_matches -ne $null) -and ($user_matches.Count -gt 0)) {
 }
 
 if (($shared_passwords -ne $null) -and ($shared_passwords.Count -gt 0)) {
-	Log-Automatic -string "Found $($shared_passwords_info.Sum) user(s) sharing $($shared_passwords_info.Count) passwords." -type 'info' -timestamp
+    Log-Automatic -string "Found $($shared_passwords_info.Sum) user(s) sharing $($shared_passwords_info.Count) passwords." -type 'info' -timestamp
 
+    $tmp = 1
+	
     foreach ($password in $shared_passwords) {
         $names = "'$($password.SamAccountName -join ""','"")'"
 
@@ -246,15 +248,17 @@ if (($shared_passwords -ne $null) -and ($shared_passwords.Count -gt 0)) {
 	        Log-Automatic -string "A single hash is shared by user(s): $names." -type 'info' -timestamp
         }
 
-	    if ($write_to_csv_file) {
+        if ($write_to_csv_file) {
             for ($i = 0; $i -lt $password.Count; $i++) {
                 if ($write_hash_to_logs) {
-    		        Log-Specific -filename $csv_filename -string "$($password.Activity[$i]);shared;$($password.PrivilegeType[$i]);$($password.SamAccountName[$i]);$($password.SID[$i]);$($password.NtHash);$i"
+                    Log-Specific -filename $csv_filename -string "$($password.Activity[$i]);shared;$($password.PrivilegeType[$i]);$($password.SamAccountName[$i]);$($password.SID[$i]);$($password.NtHash);$tmp"
                 } else {
-    		        Log-Specific -filename $csv_filename -string "$($password.Activity[$i]);shared;$($password.PrivilegeType[$i]);$($password.SamAccountName[$i]);$($password.SID[$i]);$i"
+                    Log-Specific -filename $csv_filename -string "$($password.Activity[$i]);shared;$($password.PrivilegeType[$i]);$($password.SamAccountName[$i]);$($password.SID[$i]);$tmp"
                 }
             }
-	    }
+        }
+	
+	$tmp++;
     }
 }
 
