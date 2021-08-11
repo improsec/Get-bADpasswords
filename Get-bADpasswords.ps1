@@ -108,6 +108,8 @@ Log-Automatic -string "Version:`t'$script_name v$script_version'." -type 'info' 
 Log-Automatic -string "Log file:`t'$log_filename'." -type 'info' -timestamp
 Log-Automatic -string "CSV file:`t'$csv_filename'." -type 'info' -timestamp
 
+Log-Specific -filename $csv_filename -string "sep=;"
+
 if ($write_hash_to_logs) {
     Log-Specific -filename $csv_filename -string "Activity;Password Type;Account Type;Account Name;Account SID;Account password hash;Present in password list(s)"
 } else {
@@ -247,9 +249,9 @@ if (($shared_passwords -ne $null) -and ($shared_passwords.Count -gt 0)) {
 	    if ($write_to_csv_file) {
             for ($i = 0; $i -lt $password.Count; $i++) {
                 if ($write_hash_to_logs) {
-    		        Log-Specific -filename $csv_filename -string "$($password.Activity[$i]);shared;$($password.PrivilegeType[$i]);$($password.SamAccountName[$i]);$($password.SID[$i]);$($password.NtHash)"
+    		        Log-Specific -filename $csv_filename -string "$($password.Activity[$i]);shared;$($password.PrivilegeType[$i]);$($password.SamAccountName[$i]);$($password.SID[$i]);$($password.NtHash);$i"
                 } else {
-    		        Log-Specific -filename $csv_filename -string "$($password.Activity[$i]);shared;$($password.PrivilegeType[$i]);$($password.SamAccountName[$i]);$($password.SID[$i])"
+    		        Log-Specific -filename $csv_filename -string "$($password.Activity[$i]);shared;$($password.PrivilegeType[$i]);$($password.SamAccountName[$i]);$($password.SID[$i]);$i"
                 }
             }
 	    }
