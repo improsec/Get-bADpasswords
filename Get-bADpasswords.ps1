@@ -297,14 +297,14 @@ Log-Automatic -string "Found a total of '$($shared_passwords_info.Sum)' user(s) 
 
 # =========== Dispatch email results ===========
 $mail_body = "Total users: '$($ad_users.count)'`n"
-$mail_body += "Amount of total users found with empty passwords: '$($users_with_empty_password.Count)' ($([Math]::round(($users_with_empty_password.Count / $ad_users.Count) * 100, 2))%)`n"
-$mail_body += "Amount of total users found with weak passwords: '$($user_matches.Count)' ($([Math]::round(($user_matches.Count / $ad_users.Count) * 100, 2))%)`n"
+$mail_body += "Amount of total users found with empty passwords: '$($users_with_empty_password.Count)' ($([Math]::round(($users_with_empty_password.Count / $ad_users.Count) * 100, 2))%)`t`n"
+$mail_body += "Amount of total users found with weak passwords: '$($user_matches.Count)' ($([Math]::round(($user_matches.Count / $ad_users.Count) * 100, 2))%)`t`n"
 
 foreach ($file in $file_matches.GetEnumerator()) {
-    $mail_body += "`tFrom password list '$($file.Name)': $($file.Value.Count)`n"
+    $mail_body += "`tFrom password list '$($file.Name)': $($file.Value.Count)`t`n"
 }
 
-$mail_body += "Number of total users sharing passwords: '$($shared_passwords_info.Sum)' ($([Math]::round(($shared_passwords_info.Sum / $ad_users.Count) * 100, 2))%)`n"
+$mail_body += "Number of total users sharing passwords: '$($shared_passwords_info.Sum)' ($([Math]::round(($shared_passwords_info.Sum / $ad_users.Count) * 100, 2))%)`t`n"
 $mail_body += "Number of total unique passwords shared: '$($shared_passwords_info.Count)'`n`n"
 
 # =========== Active / Inactive users ===========
@@ -326,14 +326,14 @@ $active_empty = @($users_with_empty_password | where { $_.Enabled -eq $true })
 $active_match = @($user_matches | where { $_.Enabled -eq $true })
 
 $mail_body += "Total active users: '$(($ad_users | where { $_.Enabled -eq $true }).count)'`n"
-$mail_body += "Amount of active users found with empty passwords: '$($active_empty.Count)' ($([Math]::round(($active_empty.Count / $ad_users.Count) * 100, 2))%)`n"
-$mail_body += "Amount of active users found with weak passwords: '$($active_match.Count)' ($([Math]::round(($active_match.Count / $ad_users.Count) * 100, 2))%)`n"
+$mail_body += "Amount of active users found with empty passwords: '$($active_empty.Count)' ($([Math]::round(($active_empty.Count / $ad_users.Count) * 100, 2))%)`t`n"
+$mail_body += "Amount of active users found with weak passwords: '$($active_match.Count)' ($([Math]::round(($active_match.Count / $ad_users.Count) * 100, 2))%)`t`n"
 
 foreach ($file in $file_matches.GetEnumerator()) {
     $active_file = @($file.Value | where { $_.Enabled -eq $true })
 
     if ($active_file.Count -gt 0) {
-        $mail_body += "`tFrom password list '$($file.Name)': $($active_file.Count)`n"
+        $mail_body += "`tFrom password list '$($file.Name)': $($active_file.Count)`t`n"
     }
 }
 
@@ -344,14 +344,14 @@ $inactive_empty = @($users_with_empty_password | where { $_.Enabled -eq $false }
 $inactive_match = @($user_matches | where { $_.Enabled -eq $false })
 
 $mail_body += "Total inactive users: '$(($ad_users | where { $_.Enabled -eq $false }).count)'`n"
-$mail_body += "Amount of active users found with empty passwords: '$($inactive_empty.Count)' ($([Math]::round(($inactive_empty.Count / $ad_users.Count) * 100, 2))%)`n"
-$mail_body += "Amount of active users found with weak passwords: '$($inactive_match.Count)' ($([Math]::round(($inactive_match.Count / $ad_users.Count) * 100, 2))%)`n"
+$mail_body += "Amount of inactive users found with empty passwords: '$($inactive_empty.Count)' ($([Math]::round(($inactive_empty.Count / $ad_users.Count) * 100, 2))%)`t`n"
+$mail_body += "Amount of inactive users found with weak passwords: '$($inactive_match.Count)' ($([Math]::round(($inactive_match.Count / $ad_users.Count) * 100, 2))%)`t`n"
 
 foreach ($file in $file_matches.GetEnumerator()) {
     $inactive_file = @($file.Value | where { $_.Enabled -eq $false })
 
     if ($inactive_file.Count -gt 0) {
-        $mail_body += "`tFrom password list '$($file.Name)': $($inactive_file.Count)`n"
+        $mail_body += "`tFrom password list '$($file.Name)': $($inactive_file.Count)`t`n"
     }
 }
 
@@ -359,22 +359,22 @@ $mail_body += "Number of inactive users sharing passwords: '$($inactive_shared)'
 
 # =========== Shared passwords ===========
 if (($users_with_empty_password -ne $null) -and ($users_with_empty_password.Count -gt 0)) {
-    $mail_body += "Users with empty passwords:`n"
-    $mail_body += "$($users_with_empty_password.SamAccountName -join ""`n"")`n`n"
+    $mail_body += "Users with empty passwords:`t`n"
+    $mail_body += "$($users_with_empty_password.SamAccountName -join ""`t`n"")`n`n"
 }
 
 if (($user_matches -ne $null) -and ($user_matches.Count -gt 0)) {
-    $mail_body += "Users with weak passwords:`n"
-    $mail_body += "$($user_matches.SamAccountName -join ""`n"")`n`n"
+    $mail_body += "Users with weak passwords:`t`n"
+    $mail_body += "$($user_matches.SamAccountName -join ""`t`n"")`n`n"
 }
 
 if (($shared_passwords -ne $null) -and ($shared_passwords.Count -gt 0)) {
-    $mail_body += "Users with shared passwords:`n"
+    $mail_body += "Users with shared passwords:`t`n"
 
     $tmp = 1
 
     foreach ($password in $shared_passwords) {
-        $mail_body += "$($tmp): '$($password.SamAccountName -join ""','"")'`n"
+        $mail_body += "$($tmp): '$($password.SamAccountName -join ""','"")'`t`n"
         $tmp++;
     }
 }
