@@ -8,7 +8,12 @@
 
 $locale = "common"
 
-$years = (0..9 | foreach{ $_ }) + (00..99 | foreach { $_.ToString("00") }) + (1950..2021 | foreach { $_.ToString() }) + @("123", "1234", "12345")
+$current_year = (Get-Date).Year
+$years = @(0..9 | ForEach-Object { $_.ToString() }) +
+         @(0..99 | ForEach-Object { $_.ToString("00") }) +
+         @(1950..$current_year | ForEach-Object { $_.ToString() }) +
+         @("123","1234","12345")
+
 $permutations = @("", ".", "!", "?", "=", ".!", "..", "!!", "!.", "?.", ".=")
 
 $strings = @("Test","Qwerty","Qwert","Qwer","Password","Passw0rd","Pa`$`$word","Pa`$`$w0rd","Pa`$`$W0rd","P@ssword","P@ssw0rd","Welcome","Start","End")

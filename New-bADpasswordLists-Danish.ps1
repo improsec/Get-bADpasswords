@@ -8,7 +8,12 @@
 
 $locale = "da"
 
-$years = (0..9 | foreach{ $_ }) + (00..99 | foreach { $_.ToString("00") }) + (1950..2021 | foreach { $_.ToString() }) + @("123", "1234", "12345")
+$current_year = (Get-Date).Year
+$years = @(0..9 | ForEach-Object { $_.ToString() }) +
+         @(0..99 | ForEach-Object { $_.ToString("00") }) +
+         @(1950..$current_year | ForEach-Object { $_.ToString() }) +
+         @("123","1234","12345")
+
 $permutations = @("", ".", "!", "?", "=", ".!", "..", "!!", "!.", "?.", ".=")
 
 $strings = @("Velkommen","Farvel","Vinter",[Regex]::Unescape("For\u00e5r"),"Foraar","Sommer",[Regex]::Unescape("Efter\u00e5r"),"Efteraar","Januar","Februar","Marts","April","Maj","Juni","Juli","August","September","Oktober","November","December","Mandag","Tirsdag","Onsdag","Torsdag","Fredag",[Regex]::Unescape("L\u00f8rdag"),"Loerdag",[Regex]::Unescape("S\u00f8ndag"),"Soendag")
