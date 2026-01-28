@@ -22,7 +22,7 @@ foreach ($string in $strings) {
     $weak.Add("$string") > $null
     $weak.Add("$($string.ToLower())") > $null
     $weak.Add("$($string.ToUpper())") > $null
-    
+
     foreach ($year in $years) {
         foreach ($permutation in $permutations) {
             $weak.Add("$string$year$permutation") > $null
